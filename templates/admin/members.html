@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "admin/admin_base.html" %}
 {% block title %}Members{% endblock %}
 
 {% block content %}
@@ -34,6 +34,7 @@
         {% endif %}
       </td>
       <td class="actions">
+        <a href="/members/{{ m.id }}">View</a>
         <a href="/assign/{{ m.id }}">Assign</a>
         <a href="/members/delete/{{ m.id }}">Delete</a>
       </td>

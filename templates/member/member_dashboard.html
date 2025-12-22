@@ -1,0 +1,18 @@
+{% extends "member/member_base.html" %}
+{% block title %}My Membership{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:500px; margin:auto;">
+  <h2>Welcome, {{ data.name }}</h2>
+
+  {% if data.plan %}
+    <p><strong>Plan:</strong> {{ data.plan }}</p>
+    <p><strong>Start Date:</strong> {{ data.start_date }}</p>
+    <p><strong>End Date:</strong> {{ data.end_date }}</p>
+  {% else %}
+    <p>❌ No active membership found.</p>
+  {% endif %}
+
+  <a href="/logout" class="btn" style="margin-top:20px;">Logout</a>
+</div>
+{% endblock %}
