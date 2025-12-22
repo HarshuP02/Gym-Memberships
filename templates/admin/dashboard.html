@@ -1,30 +1,23 @@
 {% extends "admin/admin_base.html" %}
-
-{% block title %}Admin Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
+<div class="card-grid">
 
-<div class="card">
-  <h2 style="margin-bottom: 20px;">Dashboard Overview</h2>
-
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-
-    <div class="card">
-      <p style="color:#9ca3af;">Total Members</p>
-      <h1>{{ total_members }}</h1>
-    </div>
-
-    <div class="card">
-      <p style="color:#9ca3af;">Active Memberships</p>
-      <h1 style="color:#34d399;">{{ active_memberships }}</h1>
-    </div>
-
-    <div class="card">
-      <p style="color:#9ca3af;">Expired Memberships</p>
-      <h1 style="color:#f87171;">{{ expired_memberships }}</h1>
-    </div>
-
+  <div class="card">
+    <h3>Total Members</h3>
+    <p class="stat">{{ total_members }}</p>
   </div>
-</div>
 
+  <div class="card active">
+    <h3>Active Memberships</h3>
+    <p class="stat">{{ active_memberships }}</p>
+  </div>
+
+  <div class="card expired">
+    <h3>Expired Memberships</h3>
+    <p class="stat">{{ expired_memberships }}</p>
+  </div>
+
+</div>
 {% endblock %}

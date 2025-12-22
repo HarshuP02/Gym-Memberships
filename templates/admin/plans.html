@@ -3,12 +3,15 @@
 
 {% block content %}
 <div class="card">
-  <h2>Plans</h2>
 
-  <form method="post" style="display:grid; grid-template-columns:2fr 1fr auto; gap:12px;">
+  <div class="page-header">
+    <h2>Plans</h2>
+  </div>
+
+  <form method="post" class="inline-form">
     <input name="name" placeholder="Plan name" required>
-    <input name="duration" placeholder="Days" required>
-    <button class="btn">Add</button>
+    <input name="duration" placeholder="Duration (days)" required>
+    <button class="btn primary">Add Plan</button>
   </form>
 
   <table>
@@ -19,10 +22,11 @@
 
     {% for p in plans %}
     <tr>
-      <td>{{ p[1] }}</td>
-      <td>{{ p[2] }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.duration }}</td>
     </tr>
     {% endfor %}
   </table>
+
 </div>
 {% endblock %}

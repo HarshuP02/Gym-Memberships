@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}Admin | IronFlex{% endblock %}</title>
+  <title>{% block title %}Admin Panel{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="admin-body">
 
-  <header class="admin-header">
-    <h2>🏋️ IronFlex Admin</h2>
-    <nav>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/members">Members</a>
-      <a href="/plans">Plans</a>
-      <a href="/logout" class="danger">Logout</a>
-    </nav>
-  </header>
+<body>
 
-  <main class="container">
-    {% block content %}{% endblock %}
-  </main>
+<header class="admin-header">
+  <h1>🏋️ IronFlex Admin</h1>
+
+  <nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/members">Members</a>
+    <a href="/plans">Plans</a>
+    <a href="/logout" class="danger">Logout</a>
+  </nav>
+</header>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
 
 </body>
 </html>
