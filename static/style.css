@@ -46,6 +46,21 @@
   border: 1px solid #ccc;
 }
 
+input,
+select,
+button {
+  font-size: 1rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+}
+
 .note {
   margin-top: 1.5rem;
   font-size: 0.85rem;
@@ -60,14 +75,32 @@ body {
 
 .container {
   padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
 
 /* ---------- BUTTONS ---------- */
 .btn {
-  padding: 0.7rem 1.2rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+  }
 }
 
 .primary {
@@ -82,6 +115,21 @@ body {
 
 .danger {
   color: #dc2626;
+}
+
+/* ---------- MOBILE RESET ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* ---------- LANDING ---------- */
@@ -133,21 +181,20 @@ body {
   justify-content: space-between;
 }
 
-/* ---------- ADMIN UI ---------- */
+/* Mobile */
+@media (max-width: 768px) {
+  .admin-header nav,
+  .member-header nav {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 
-.admin-header {
-  background: #111827;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.admin-header nav a {
-  color: white;
-  margin-left: 1rem;
-  text-decoration: none;
+  .admin-header nav a,
+  .member-header nav a {
+    display: inline-block;
+    margin-right: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
 }
 
 .card {
@@ -155,6 +202,15 @@ body {
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .card,
+  .membership-card,
+  .landing-card,
+  .auth-card {
+    padding: 1.2rem;
+  }
 }
 
 .card-grid {
@@ -220,3 +276,182 @@ body {
   margin-bottom: 1rem;
 }
 
+/* ---------- SCROLLABLE TABLE ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  table th,
+  table td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
+
+
+/* ---------- MEMBER DASHBOARD ---------- */
+
+.member-dashboard {
+  max-width: 500px;
+  margin: 0 auto;
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .member-dashboard {
+    padding: 0 0.5rem;
+  }
+
+  .membership-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.welcome-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.welcome-card h2 {
+  margin-bottom: 0.3rem;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.membership-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.membership-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.membership-header h3 {
+  font-size: 1.2rem;
+}
+
+.membership-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.2rem;
+}
+
+.value {
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge.expired {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.no-membership {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* ---------- PROGRESS BAR ---------- */
+
+.progress-section {
+  margin-top: 1.5rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.15);
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 999px;
+
+  /* 🔥 animation */
+  transition: width 1.2s ease-in-out;
+}
+
+/* ---------- EXPIRY WARNING ---------- */
+
+.expiry-warning {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* ---------- RENEW SUGGESTION ---------- */
+
+.renew-suggestion {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  text-align: center;
+}
+
+.renew-suggestion span {
+  display: block;
+  font-size: 0.85rem;
+  color: #bfdbfe;
+  margin-top: 0.3rem;
+}

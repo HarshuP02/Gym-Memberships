@@ -20,18 +20,47 @@ def admin_login():
 @admin_required
 def dashboard():
     conn = get_db()
+
     today = date.today().isoformat()
+    soon_date = (date.today() + timedelta(days=7)).isoformat()
 
-    total = conn.execute("SELECT COUNT(*) FROM members").fetchone()[0]
-    active = conn.execute("SELECT COUNT(*) FROM memberships WHERE end_date >= ?", (today,)).fetchone()[0]
-    expired = conn.execute("SELECT COUNT(*) FROM memberships WHERE end_date < ?", (today,)).fetchone()[0]
+    total_members = conn.execute(
+        "SELECT COUNT(*) FROM members"
+    ).fetchone()[0]
 
-    conn.close()
-    return render_template("admin/dashboard.html",
-                           total_members=total,
-                           active_memberships=active,
-                           expired_memberships=expired)
+    active_memberships = conn.execute(
+        """
+        SELECT COUNT(*) FROM memberships
+        WHERE end_date >= ?
+        """,
+        (today,)
+    ).fetchone()[0]
 
+    expired_memberships = conn.execute(
+        """
+        SELECT COUNT(*) FROM memberships
+        WHERE end_date < ?
+        """,
+        (today,)
+    ).fetchone()[0]
+
+    expiring_soon = conn.execute(
+        """
+        SELECT COUNT(*) FROM memberships
+        WHERE end_date BETWEEN ? AND ?
+        """,
+        (today, soon_date)
+    ).fetchone()[0]
+
+    conn.close()  # ✅ CLOSE AT THE VERY END
+
+    return render_template(
+        "admin/dashboard.html",
+        total_members=total_members,
+        active_memberships=active_memberships,
+        expired_memberships=expired_memberships,
+        expiring_soon=expiring_soon
+    )
 
 @admin_bp.route("/members")
 @admin_required
@@ -184,4 +213,35 @@ def member_detail(member_id):
         member=member,
         membership=membership,
         today=today
+    )
+
+@admin_bp.route("/expiring")
+@admin_required
+def expiring_members():
+    conn = get_db()
+    today = date.today().isoformat()
+    soon_date = (date.today() + timedelta(days=7)).isoformat()
+
+    rows = conn.execute(
+        """
+        SELECT
+            m.id,
+            m.name,
+            m.phone,
+            p.name AS plan,
+            ms.end_date
+        FROM memberships ms
+        JOIN members m ON ms.member_id = m.id
+        JOIN plans p ON ms.plan_id = p.id
+        WHERE ms.end_date BETWEEN ? AND ?
+        ORDER BY ms.end_date ASC
+        """,
+        (today, soon_date)
+    ).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "admin/expiring.html",
+        members=rows
     )

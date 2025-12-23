@@ -4,20 +4,24 @@
 {% block content %}
 <div class="card-grid">
 
-  <div class="card">
-    <h3>Total Members</h3>
-    <p class="stat">{{ total_members }}</p>
-  </div>
+      <div class="card">
+            <h3>Total Members</h3>
+            <p class="stat">{{ total_members }}</p>
+      </div>
 
-  <div class="card active">
-    <h3>Active Memberships</h3>
-    <p class="stat">{{ active_memberships }}</p>
-  </div>
+      <div class="card active">
+            <h3>Active Memberships</h3>
+            <p class="stat">{{ active_memberships }}</p>
+      </div>
 
-  <div class="card expired">
-    <h3>Expired Memberships</h3>
-    <p class="stat">{{ expired_memberships }}</p>
-  </div>
+      <div class="card expired">
+            <h3>Expired Memberships</h3>
+            <p class="stat">{{ expired_memberships }}</p>
+      </div>
+      <div class="card warning">
+            <h3>Expiring Soon</h3>
+            <p class="stat">{{ expiring_soon }}</p>
+      </div>
 
 </div>
 {% endblock %}

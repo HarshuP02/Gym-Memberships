@@ -2,25 +2,81 @@
 {% block title %}My Membership{% endblock %}
 
 {% block content %}
-<div class="card">
 
-  <h2>Welcome, {{ data.name }}</h2>
+<div class="member-dashboard">
+
+  <div class="welcome-card">
+    <h2>Welcome, {{ data.name }}</h2>
+    <p class="muted">Your membership overview</p>
+  </div>
 
   {% if data.plan %}
-    <div class="membership-box">
-      <p><strong>Plan:</strong> {{ data.plan }}</p>
-      <p><strong>Start Date:</strong> {{ data.start_date }}</p>
-      <p><strong>End Date:</strong> {{ data.end_date }}</p>
 
-      {% if data.end_date >= today %}
-        <span class="badge active">Active</span>
-      {% else %}
-        <span class="badge expired">Expired</span>
-      {% endif %}
+  {# ---------- DATE VALUES COME FROM BACKEND ---------- #}
+  {# remaining_days → int #}
+  {# progress → int (0–100) #}
+  {# is_active → bool #}
+
+
+<div class="membership-card">
+
+  <div class="membership-header">
+    <h3>{{ data.plan }}</h3>
+
+    {% if is_active %}
+      <span class="badge active">Active</span>
+    {% else %}
+      <span class="badge expired">Expired</span>
+    {% endif %}
+  </div>
+
+  <div class="membership-info">
+    <div>
+      <span class="label">Start Date</span>
+      <span class="value">{{ data.start_date }}</span>
     </div>
+    <div>
+      <span class="label">End Date</span>
+      <span class="value">{{ data.end_date }}</span>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-section">
+    <div class="progress-label">
+      <span>Membership Progress</span>
+      <span>{{ remaining_days }} days left</span>
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        style="width: {{ progress }}%;"
+      ></div>
+      </div>
+    </div>
+    {% if is_active and remaining_days <= 7 %}
+      <div class="expiry-warning">
+        ⚠ Expiring in {{ remaining_days }} days. Please renew soon.
+      </div>
+    {% endif %}
+    {% if is_active and remaining_days <= 7 %}
+      <div class="renew-suggestion">
+        <p>💡 Renew now to avoid interruption</p>
+        <span>Contact gym admin for renewal</span>
+      </div>
+    {% endif %}
+
+  </div>
+
+
   {% else %}
-    <p>❌No active membership. Please contact gym admin.</p>
+  <div class="no-membership">
+    <p>❌No active membership found.</p>
+    <p class="muted">Please contact gym admin.</p>
+  </div>
   {% endif %}
 
 </div>
+
 {% endblock %}
